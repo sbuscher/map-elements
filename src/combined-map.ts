@@ -1,8 +1,7 @@
 import ArcGISMap from "@arcgis/core/Map";
 import MapView from '@arcgis/core/views/MapView';
 
-import { MapOptions, MapSpecfication } from "../interfaces";
-import { MapService } from './map-service';
+import { MapOptions, MapSpecfication } from "./interfaces";
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -16,7 +15,7 @@ template.innerHTML = `
   <div class='map-container'></div>
 `
 
-export class Map extends HTMLElement {
+export class CombinedMap extends HTMLElement {
   private _mapView?: MapView;
   private _container?: HTMLDivElement;
 
@@ -24,10 +23,10 @@ export class Map extends HTMLElement {
     return this._mapView;
   }
 
-  constructor(/*private mapService: MapService*/) {
+  constructor() {
     super();
 
-    window.console.log("map constructor");
+    window.console.log("constructor");
 
     this.attachShadow({ mode: 'open' });
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
@@ -53,10 +52,13 @@ export class Map extends HTMLElement {
       container: this._container!
     }
 
-    const mapService = new MapService();
-    mapService.heartbeat();
-    mapService.buildMapView(mapSpec, {});
+    this._mapView = new MapView({ 
+      map: mapSpec.map,
+      container: mapSpec.container
+    });
+
+    await this._mapView.when();
   }
 }
 
-window.customElements.define('ex-map', Map);
+window.customElements.define('ex-map', CombinedMap);

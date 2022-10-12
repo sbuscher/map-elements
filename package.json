@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/arcgis-js-api": "^4.24.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
   },
   "dependencies": {
-    "@arcgis/core": "^4.24.7"
+    "@arcgis/core": "^4.24.7",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.7.0"
   }
 }
