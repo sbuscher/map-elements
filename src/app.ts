@@ -1,10 +1,4 @@
-// import 'reflect-metadata';
-// import { container } from 'tsyringe';
-
 import './styles.css';
-
-// import { MapService } from './elements/map-service';
-
 
 // move into map.ts as properties
 // const options = {
@@ -26,3 +20,9 @@ import './styles.css';
 // Works without MapService injection
 // import { Map } from './elements/map';
 // new Map();
+
+import { MapService } from './elements/map-service';
+import { Map } from './elements/map';
+
+const mapService = new MapService();
+new Map(mapService);

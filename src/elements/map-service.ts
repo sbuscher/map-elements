@@ -1,19 +1,14 @@
-import 'reflect-metadata';
-import { injectable } from 'tsyringe';
 import MapView from '@arcgis/core/views/MapView';
-
 import { MapOptions, MappingService, MapSpecfication } from '../interfaces';
 
-// @injectable()
-export class MapService implements MappingService {
+export class MapService {
+  private _mapView?: MapView;
+
   constructor() {
     window.console.log("MapService constructor");
   }
 
-  private _mapView?: MapView;
-
   buildMapView = async (mapSpec: MapSpecfication, options: MapOptions) => {
-    window.console.log("buildMapView()");
     // this._mapView = new MapView({ ...mapSpec, ...options });
     this._mapView = new MapView({ 
       map: mapSpec.map,
